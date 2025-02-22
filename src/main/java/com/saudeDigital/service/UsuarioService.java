@@ -2,9 +2,14 @@ package com.saudeDigital.service;
 
 import com.saudeDigital.dtos.UsuarioDTO;
 import com.saudeDigital.entities.Usuario;
+import com.saudeDigital.exceptions.BussinesException;
 import com.saudeDigital.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Objects;
+
+import static java.util.Objects.isNull;
 
 @Service
 public class UsuarioService {
@@ -24,33 +29,27 @@ public class UsuarioService {
         return converterUsuario(usuario);
     }
 
-
     public UsuarioDTO buscarUsuarioPorId(Long id) {
         Usuario usuario = usuarioRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Usuário com ID " + id + " não foi encontrado."));
+                .orElseThrow(() -> new IllegalArgumentException("Usuário não foi encontrado."));
         return converterUsuario(usuario);
     }
 
-
     public UsuarioDTO atualizarUsuario(Long id, UsuarioDTO usuarioDTO) {
+        if (isNull(id)) {
+            throw new BussinesException("Usuário não encontrado.");
+        }
 
-        Usuario usuarioExistente = usuarioRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Usuário com ID " + id + " não foi encontrado."));
+        Usuario usuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new BussinesException("Usuário não encontrado."));
 
-
-        usuarioExistente.setNome(usuarioDTO.getNome());
-        usuarioExistente.setData_nascimento(usuarioDTO.getData_nascimento());
-        usuarioExistente.setCpf(usuarioDTO.getCpf());
-        usuarioExistente.setEmail(usuarioDTO.getEmail());
-        usuarioExistente.setSenha(usuarioDTO.getSenha());
-        usuarioExistente.setTelefone(usuarioDTO.getTelefone());
-
-
-        Usuario usuarioAtualizado = usuarioRepository.save(usuarioExistente);
-
+        Usuario usuarioAtualizado = converterUsuarioDTO(usuarioDTO);
+        usuarioAtualizado.setId(usuario.getId());
+        usuarioRepository.save(usuarioAtualizado);
 
         return converterUsuario(usuarioAtualizado);
     }
+
 
 
     public void deletarUsuario(Long id) {
