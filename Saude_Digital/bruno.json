@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "Saude_Digital",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

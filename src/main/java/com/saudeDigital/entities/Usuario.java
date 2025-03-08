@@ -1,5 +1,6 @@
 package com.saudeDigital.entities;
 
+import com.saudeDigital.enums.TipoUsuario;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -28,4 +29,10 @@ public class Usuario {
     private String telefone;
 
 
+    @Enumerated(EnumType.STRING)
+    private TipoUsuario tipoUsuario;
+
+    public boolean isMedico(){
+        return tipoUsuario == TipoUsuario.MEDICO;
+    }
 }

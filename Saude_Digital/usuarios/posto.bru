@@ -1,0 +1,21 @@
+meta {
+  name: posto
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:8080/exames
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "tipo": "Raio-X",
+      "dataExame": "2025-03-07",
+      "resultado": "Fratura antebraço esquerdo",
+      "arquivoResultado": "raio-x_123.pdf"
+  }
+  
+}

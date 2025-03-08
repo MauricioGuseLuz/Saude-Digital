@@ -18,4 +18,12 @@ public class Medico {
 
     private String crm;
 
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", nullable = false) // Coluna NOT NULL
+    private Usuario usuario;
+
+    @ManyToOne
+    @JoinColumn(name = "especialidade_id", nullable = false) // Coluna NOT NULL
+    private Especialidade especialidade;
+
 }

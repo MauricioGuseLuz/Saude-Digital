@@ -1,10 +1,10 @@
 package com.saudeDigital.exceptions;
 
 public class BussinesException extends RuntimeException {
+    private static final long serialVersionUID = 1L;
 
     private static final int errorCode = 400;
 
-    private final long serialVersionUID = 1L;
     public BussinesException(String message) {
         super(message);
     }
@@ -12,3 +12,7 @@ public class BussinesException extends RuntimeException {
         return errorCode;
     }
 }
+
+
+
+

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/usuarios")
+@RequestMapping("/usuarios")
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
@@ -20,7 +20,7 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
-    @PostMapping("/cadastrar")
+    @PostMapping()
     public ResponseEntity<UsuarioDTO> cadastrarUsuario(@RequestBody UsuarioDTO usuarioDTO) {
         UsuarioDTO usuarioCadastrado = usuarioService.cadastrarUsuario(usuarioDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioCadastrado);
@@ -28,14 +28,19 @@ public class UsuarioController {
 
     @GetMapping("/{id}")
     public ResponseEntity<UsuarioDTO> buscarUsuarioPorId(@PathVariable Long id) {
-        UsuarioDTO usuario = usuarioService.buscarUsuarioPorId(id);
+        UsuarioDTO usuario = usuarioService.buscarUsuarioDTOPorId(id);
         return ResponseEntity.ok(usuario);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<UsuarioDTO> atualizarUsuario(@PathVariable Long id, @RequestBody UsuarioDTO usuarioDTO) {
-        UsuarioDTO usuarioAtualizado = usuarioService.atualizarUsuario(id, usuarioDTO);
-        return ResponseEntity.ok(usuarioAtualizado);
+    @GetMapping()
+    public ResponseEntity<List<UsuarioDTO>> listarUsuarios(){
+        List<UsuarioDTO> usuarios = usuarioService.listarUsuarios();
+        return ResponseEntity.ok(usuarios);
+    }
+
+    @PutMapping()
+    public ResponseEntity<UsuarioDTO> atualizarUsuario(@RequestBody UsuarioDTO usuarioDTO) {
+        return ResponseEntity.ok(usuarioService.atualizarUsuario(usuarioDTO));
     }
 
     @DeleteMapping("/{id}")

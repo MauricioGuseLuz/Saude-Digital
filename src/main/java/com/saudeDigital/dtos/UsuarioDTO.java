@@ -1,6 +1,7 @@
 package com.saudeDigital.dtos;
 
 
+import com.saudeDigital.enums.TipoUsuario;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -22,5 +23,12 @@ public class UsuarioDTO {
 
     private String telefone;
 
+    private TipoUsuario tipoUsuario;
+
+    private MedicoDTO medico;
+
+    public boolean isMedico() {
+        return tipoUsuario == TipoUsuario.MEDICO;
+    }
 
 }

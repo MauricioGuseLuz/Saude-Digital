@@ -19,8 +19,6 @@ public class ErrorResponse {
         this.errorCode = errorCode;
         return errorCode;
     }
-    public String setMessage(String message) {
-        this.message = message;
-        return message;
-    }
+    public String setMessage(String message) {this.message = message;
+        return message;}
 }
