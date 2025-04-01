@@ -1,29 +1,26 @@
 package com.saudeDigital.entities;
 
-
 import jakarta.persistence.*;
 import lombok.Data;
+import java.util.List;
 
 @Data
 @Entity
 @Table(name = "medicos")
 public class Medico {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long id;
 
     private String nome;
-
     private String crm;
+    private String especialidade;
 
-    @ManyToOne
-    @JoinColumn(name = "usuario_id", nullable = false) // Coluna NOT NULL
-    private Usuario usuario;
+    @OneToMany(mappedBy = "medico")
+    private List<Consulta> consultas;
 
-    @ManyToOne
-    @JoinColumn(name = "especialidade_id", nullable = false) // Coluna NOT NULL
-    private Especialidade especialidade;
+    @OneToMany(mappedBy = "medico")
+    private List<Usuario> usuarios;
+
 
 }

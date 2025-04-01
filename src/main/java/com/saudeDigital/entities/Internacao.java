@@ -1,24 +1,28 @@
 package com.saudeDigital.entities;
 
+
 import jakarta.persistence.*;
 import lombok.Data;
-import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Table(name = "consultas")
-public class Consulta {
+@Table(name = "internacao")
+public class Internacao {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
 
-    private LocalDateTime dataHora;
+    private String gravidade;
 
-    @ManyToOne
-    @JoinColumn(name = "medico_id", referencedColumnName = "id")
-    private Medico medico;
+    private String estado;
+
+    private int numeroQuarto;
 
     @ManyToOne
     @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     private Usuario usuario;
+
+
 }

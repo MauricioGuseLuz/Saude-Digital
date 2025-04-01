@@ -39,10 +39,6 @@ public class UsuarioService {
 
         usuarioSpec.verificarSeExisteUsuarioComCpfDuplicado(usuarioCpf);
 
-        if (usuarioDTO.isMedico() && isNull(usuarioDTO.getMedico())){
-            throw new BussinesException("Medico não informado!");
-        }
-
         Usuario usuario = converterUsuarioDTO(usuarioDTO);
         usuario = usuarioRepository.save(usuario);
         return converterUsuario(usuario);
@@ -103,7 +99,6 @@ public class UsuarioService {
         usuario.setEmail(usuarioDTO.getEmail());
         usuario.setSenha(usuarioDTO.getSenha());
         usuario.setTelefone(usuarioDTO.getTelefone());
-        usuario.setTipoUsuario(usuarioDTO.getTipoUsuario());
         return usuario;
     }
     private UsuarioDTO converterUsuario(Usuario usuario) {
@@ -114,7 +109,6 @@ public class UsuarioService {
         usuarioDTO.setEmail(usuario.getEmail());
         usuarioDTO.setSenha(usuario.getSenha());
         usuarioDTO.setTelefone(usuario.getTelefone());
-        usuarioDTO.setTipoUsuario(usuario.getTipoUsuario());
         return usuarioDTO;
     }
 }

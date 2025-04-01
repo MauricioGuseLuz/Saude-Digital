@@ -1,8 +1,10 @@
 package com.saudeDigital.dtos;
 
 
-import com.saudeDigital.enums.TipoUsuario;
+
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 public class MedicoDTO {
@@ -10,6 +12,11 @@ public class MedicoDTO {
     private Long id;
     private String nome;
     private String crm;
-    private Long especialidadeId;
-    private Long usuarioId;
+    private String especialidade;
+
+    private List<UsuarioDTO> usuarios;
+    private List<ConsultaDTO> consultas;
+
+
 }
+
