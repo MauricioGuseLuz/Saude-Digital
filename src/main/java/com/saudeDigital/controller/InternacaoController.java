@@ -40,9 +40,13 @@ public class InternacaoController {
     public ResponseEntity<InternacaoDTO> atualizarInternacao(@RequestBody InternacaoDTO internacaoDTO) {
         return ResponseEntity.ok(internacaoService.atualizarInternacao(internacaoDTO));
     }
-    @DeleteMapping()
-    public ResponseEntity<Void> deletarInternacao(@RequestBody InternacaoDTO internacaoDTO) {
-        internacaoService.deletarInternacao(internacaoDTO.getId());
-        return ResponseEntity.noContent().build();
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deletarInternacao(@PathVariable Long id) {
+        if (!internacaoService.internacaoRepository.existsById(id)) {
+            return ResponseEntity.status(404).body("Internação não encontrada!");
+        }
+
+        internacaoService.deletarInternacao(id);
+        return ResponseEntity.ok("Internação deletada com sucesso!");
     }
 }

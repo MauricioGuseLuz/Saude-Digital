@@ -13,7 +13,7 @@ import java.util.List;
 @Service
 public class InternacaoService {
 
-    private final InternacaoRepository internacaoRepository;
+    public final InternacaoRepository internacaoRepository;
     private final UsuarioRepository usuarioRepository;
 
     @Autowired
@@ -33,7 +33,7 @@ public class InternacaoService {
 
 
         Internacao internacao = new Internacao();
-        internacao.setGravidade(internacaoDTO.getGravidade());
+        internacao.setSituacao(internacaoDTO.getSituacao());
         internacao.setEstado(internacaoDTO.getEstado());
         internacao.setNumeroQuarto(internacaoDTO.getNumeroQuarto());
         internacao.setUsuario(usuario);
@@ -67,14 +67,19 @@ public class InternacaoService {
         return converterInternacao(internacao);
     }
 
-    public void deletarInternacao(Long id) {
+    public String deletarInternacao(Long id) {
+        if (!internacaoRepository.existsById(id)) {
+            throw new RuntimeException("Internação não encontrada!");
+        }
+
         internacaoRepository.deleteById(id);
+        return "Médico deletado com sucesso!";
     }
 
     private Internacao converterInternacaoDTO(InternacaoDTO internacaoDTO) {
         Internacao internacao = new Internacao();
         internacao.setId(internacaoDTO.getId());
-        internacao.setGravidade(internacaoDTO.getGravidade());
+        internacao.setSituacao(internacaoDTO.getSituacao());
         internacao.setEstado(internacaoDTO.getEstado());
         internacao.setNumeroQuarto(internacaoDTO.getNumeroQuarto());
         return internacao;
@@ -83,7 +88,7 @@ public class InternacaoService {
     private InternacaoDTO converterInternacao(Internacao internacao) {
         InternacaoDTO internacaoDTO = new InternacaoDTO();
         internacaoDTO.setId(internacao.getId());
-        internacaoDTO.setGravidade(internacao.getGravidade());
+        internacaoDTO.setSituacao(internacao.getSituacao());
         internacaoDTO.setEstado(internacao.getEstado());
         internacaoDTO.setNumeroQuarto(internacao.getNumeroQuarto());
         return internacaoDTO;

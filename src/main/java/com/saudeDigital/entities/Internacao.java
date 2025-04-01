@@ -14,7 +14,7 @@ public class Internacao {
 
     private Long id;
 
-    private String gravidade;
+    private String situacao;
 
     private String estado;
 

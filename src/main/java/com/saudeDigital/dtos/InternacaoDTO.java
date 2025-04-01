@@ -8,7 +8,7 @@ public class InternacaoDTO {
 
     private Long id;
 
-    private String gravidade;
+    private String situacao;
 
     private String estado;
 
