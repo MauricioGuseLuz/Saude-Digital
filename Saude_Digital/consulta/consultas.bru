@@ -1,0 +1,20 @@
+meta {
+  name: consultas
+  type: http
+  seq: 1
+}
+
+post {
+  url: //localhost:8080/consultas
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "dataHora": "2025-04-01T10:30:00",
+      "medicoId": 2,
+      "usuarioId": 2
+  }
+  
+}
