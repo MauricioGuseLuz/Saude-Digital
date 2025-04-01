@@ -5,17 +5,19 @@ meta {
 }
 
 post {
-  url: http://localhost:8080/usuarios/1
+  url: http://localhost:8080/usuarios
   body: json
   auth: none
 }
 
 body:json {
   {
-      "tipo": "Raio-X",
-      "dataExame": "2025-03-07",
-      "resultado": "Fratura antebraço esquerdo",
-      "arquivoResultado": "raio-x_123.pdf"
+    "nome": "Aldo Silva",
+    "email": "aldo.silva@email.com",
+    "senha": "12345678",
+    "cpf": "123.456.789-00",
+    "data_nascimento": "1990-05-20",
+    "telefone": "99999-9999"
   }
   
 }

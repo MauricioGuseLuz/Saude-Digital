@@ -5,7 +5,17 @@ meta {
 }
 
 post {
-  url: //localhost:8080/internacoes
-  body: none
+  url: //localhost:8080/internacao
+  body: json
   auth: none
+}
+
+body:json {
+  {
+      "gravidade": "Alta",
+      "estado": "Estável",
+      "numeroQuarto": 101,
+      "usuarioId": 1
+  }
+  
 }
