@@ -40,9 +40,13 @@ public class MedicoController {
     public ResponseEntity<MedicoDTO> atualizarMedico(@RequestBody MedicoDTO medicoDTO) {
         return ResponseEntity.ok(medicoService.atualizarMedico(medicoDTO));
     }
-    @DeleteMapping()
-    public ResponseEntity<Void> deletarMedico(@RequestBody MedicoDTO medicoDTO) {
-        medicoService.deletarMedico(medicoDTO.getId());
-        return ResponseEntity.noContent().build();
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deletarMedico(@PathVariable Long id) {
+        if (!medicoService.medicoRepository.existsById(id)) {
+            return ResponseEntity.status(404).body("Médico não encontrado!");
+        }
+
+        medicoService.deletarMedico(id);
+        return ResponseEntity.ok("Médico deletado com sucesso!");
     }
 }

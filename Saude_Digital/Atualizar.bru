@@ -1,10 +1,10 @@
 meta {
-  name: consultas
+  name: Atualizar
   type: http
-  seq: 1
+  seq: 6
 }
 
-post {
+put {
   url: //localhost:8080/consultas
   body: json
   auth: none
@@ -12,7 +12,7 @@ post {
 
 body:json {
   {
-      "dataHora": "2025-04-01T10:30:00",
+      "dataHora": "2025-04-01T10:40:00",
       "medicoId": 2,
       "usuarioId": 3
   }

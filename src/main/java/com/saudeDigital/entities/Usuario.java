@@ -25,8 +25,6 @@ public class Usuario {
     @JoinColumn(name = "medico_id", referencedColumnName = "id")
     private Medico medico;
 
-    @OneToMany(mappedBy = "usuario")
-    private List<Internacao> internacao;
 
 
 }

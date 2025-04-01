@@ -15,7 +15,7 @@ import java.util.List;
 @Service
 public class ConsultaService {
 
-    private final ConsultaRepository consultaRepository;
+    public final ConsultaRepository consultaRepository;
     private final UsuarioRepository usuarioRepository;
     private final MedicoRepository medicoRepository;
 
@@ -76,9 +76,15 @@ public class ConsultaService {
         return converterParaConsultaDTO(consulta);
     }
 
-    public void deletarConsulta(Long id) {
+    public String deletarConsulta(Long id) {
+        if (!consultaRepository.existsById(id)) {
+            throw new RuntimeException("Consulta não encontrada!");
+        }
+
         consultaRepository.deleteById(id);
+        return "Consulta deletada com sucesso!";
     }
+
 
     public List<ConsultaDTO> listarConsultas() {
         List<Consulta> consultas = consultaRepository.findAll();

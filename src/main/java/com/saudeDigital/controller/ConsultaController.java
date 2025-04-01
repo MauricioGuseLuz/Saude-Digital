@@ -44,8 +44,12 @@ public class ConsultaController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarConsulta(@PathVariable Long id) {
+    public ResponseEntity<String> deletarConsulta(@PathVariable Long id) {
+        if (!consultaService.consultaRepository.existsById(id)) {
+            return ResponseEntity.status(404).body("Consulta não encontrada!");
+        }
+
         consultaService.deletarConsulta(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok("Consulta deletada com sucesso!");
     }
 }

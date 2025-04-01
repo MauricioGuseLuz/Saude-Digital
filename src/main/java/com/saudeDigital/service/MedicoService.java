@@ -14,7 +14,7 @@ import static java.util.Objects.nonNull;
 @Service
 public class MedicoService {
 
-    private final MedicoRepository medicoRepository;
+    public final MedicoRepository medicoRepository;
     private final UsuarioService usuarioService;
 
     @Autowired
@@ -51,9 +51,15 @@ public class MedicoService {
         return converterMedico(medico);
     }
 
-    public void deletarMedico(Long id) {
+    public String deletarMedico(Long id) {
+        if (!medicoRepository.existsById(id)) {
+            throw new RuntimeException("Médico não encontrado!");
+        }
+
         medicoRepository.deleteById(id);
+        return "Médico deletado com sucesso!";
     }
+
 
     private Medico converterMedicoDTO(MedicoDTO medicoDTO) {
         Medico medico = new Medico();
