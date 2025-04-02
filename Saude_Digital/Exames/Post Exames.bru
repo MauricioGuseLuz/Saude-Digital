@@ -5,7 +5,17 @@ meta {
 }
 
 post {
-  url: //localhost:8080
-  body: none
+  url: //localhost:8080/exames
+  body: json
   auth: none
+}
+
+body:json {
+  {
+    "tipo": "Raio_X_Braço_Esquerdo",
+    "dataExame": "2025-04-02",
+    "resultado": "Sem Contução",
+    "arquivoResultado": "hemograma_joao.pdf"
+  }
+  
 }

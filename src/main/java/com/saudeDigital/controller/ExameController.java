@@ -41,9 +41,13 @@ public class ExameController {
     public ResponseEntity<ExameDTO> atualizarExame(@RequestBody ExameDTO exameDTO) {
         return ResponseEntity.ok(exameService.atualizarExame(exameDTO));
     }
-    @DeleteMapping()
-    public ResponseEntity<Void> deletarExame(@RequestBody ExameDTO exameDTO) {
-        exameService.deletarExame(exameDTO.getId());
-        return ResponseEntity.noContent().build();
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deletarExame(@PathVariable Long id) {
+        if (!exameService.exameRepository.existsById(id)) {
+            return ResponseEntity.status(404).body("Exame não encontrado!");
+        }
+
+        exameService.deletarExame(id);
+        return ResponseEntity.ok("Exame deletado com sucesso!");
     }
 }

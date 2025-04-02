@@ -5,7 +5,17 @@ meta {
 }
 
 put {
-  url: //localhost:8080
-  body: none
+  url: //localhost:8080/medicos
+  body: json
   auth: none
+}
+
+body:json {
+  {
+      "id": 1,
+      "nome": "Dr. Lucas Silva",
+      "crm": "987654321",
+      "especialidade": "Cardiologia e Medicina Interna"
+  }
+  
 }
